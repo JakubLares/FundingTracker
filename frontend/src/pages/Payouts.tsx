@@ -37,7 +37,8 @@ const Payouts: React.FC = () => {
 
   const fetchChallenges = async () => {
     try {
-      const response = await challengeAPI.getAll();
+      // Only fetch passed challenges for payout selection
+      const response = await challengeAPI.getAll({ status: 'passed' });
       setChallenges(response.data);
     } catch (err) {
       console.error('Failed to fetch challenges');
