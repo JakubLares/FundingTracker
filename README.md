@@ -1,4 +1,4 @@
-# PropFirm Challenge Tracker
+# FundedTracker
 
 A comprehensive web application for traders to track their prop firm challenges, costs, payouts, and analyze their trading performance.
 
