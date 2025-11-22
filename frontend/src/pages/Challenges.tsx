@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { challengeAPI, propFirmAPI, exportAPI } from '../api/api';
 import type { Challenge, PropFirm, CreateChallengeDTO } from '../types';
 import '../styles/Challenges.css';
 
 const Challenges: React.FC = () => {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [allChallenges, setAllChallenges] = useState<Challenge[]>([]);
   const [propFirms, setPropFirms] = useState<PropFirm[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -28,6 +29,10 @@ const Challenges: React.FC = () => {
 
   useEffect(() => {
     fetchPropFirms();
+    fetchAllChallenges();
+  }, []);
+
+  useEffect(() => {
     fetchChallenges();
   }, [statusFilter, propFirmFilter]);
 
@@ -37,6 +42,15 @@ const Challenges: React.FC = () => {
       setPropFirms(response.data);
     } catch (err) {
       console.error('Failed to fetch prop firms');
+    }
+  };
+
+  const fetchAllChallenges = async () => {
+    try {
+      const response = await challengeAPI.getAll();
+      setAllChallenges(response.data);
+    } catch (err) {
+      console.error('Failed to fetch all challenges');
     }
   };
 
@@ -55,6 +69,12 @@ const Challenges: React.FC = () => {
     }
   };
 
+  // Filter prop firms to only show those that have challenges
+  const propFirmsWithChallenges = useMemo(() => {
+    const firmIds = new Set(allChallenges.map(c => c.propFirmId));
+    return propFirms.filter(firm => firmIds.has(firm.id));
+  }, [propFirms, allChallenges]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -67,6 +87,7 @@ const Challenges: React.FC = () => {
       }
       resetForm();
       fetchChallenges();
+      fetchAllChallenges();
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to save challenge');
     }
@@ -93,6 +114,7 @@ const Challenges: React.FC = () => {
     try {
       await challengeAPI.delete(id);
       fetchChallenges();
+      fetchAllChallenges();
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to delete challenge');
     }
@@ -141,6 +163,7 @@ const Challenges: React.FC = () => {
       const response = await exportAPI.importChallenges(text);
       alert(`Import completed! Imported: ${response.data.imported}, Skipped: ${response.data.skipped}`);
       fetchChallenges();
+      fetchAllChallenges();
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -188,7 +211,7 @@ const Challenges: React.FC = () => {
         </select>
         <select value={propFirmFilter} onChange={(e) => setPropFirmFilter(e.target.value)}>
           <option value="">All Prop Firms</option>
-          {propFirms.map((firm) => (
+          {propFirmsWithChallenges.map((firm) => (
             <option key={firm.id} value={firm.id}>
               {firm.name}
             </option>
