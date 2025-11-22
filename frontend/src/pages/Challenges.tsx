@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { challengeAPI, propFirmAPI } from '../api/api';
+import React, { useEffect, useState, useRef } from 'react';
+import { challengeAPI, propFirmAPI, exportAPI } from '../api/api';
 import type { Challenge, PropFirm, CreateChallengeDTO } from '../types';
 import '../styles/Challenges.css';
 
@@ -23,6 +23,8 @@ const Challenges: React.FC = () => {
     endDate: '',
     notes: '',
   });
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchPropFirms();
@@ -111,6 +113,42 @@ const Challenges: React.FC = () => {
     setShowForm(false);
   };
 
+  const handleExport = async () => {
+    try {
+      const response = await exportAPI.exportChallenges();
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'challenges.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err: any) {
+      setError('Failed to export challenges');
+    }
+  };
+
+  const handleImport = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const response = await exportAPI.importChallenges(text);
+      alert(`Import completed! Imported: ${response.data.imported}, Skipped: ${response.data.skipped}`);
+      fetchChallenges();
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to import challenges');
+    }
+  };
+
   if (isLoading) {
     return <div className="loading">Loading...</div>;
   }
@@ -119,10 +157,25 @@ const Challenges: React.FC = () => {
     <div className="challenges-page">
       <div className="page-header">
         <h1>Challenges</h1>
-        <button onClick={() => setShowForm(!showForm)} className="add-button">
-          {showForm ? 'Cancel' : '+ Add Challenge'}
-        </button>
+        <div className="header-actions">
+          <button onClick={handleExport} className="export-button">
+            Export CSV
+          </button>
+          <button onClick={handleImport} className="import-button">
+            Import CSV
+          </button>
+          <button onClick={() => setShowForm(!showForm)} className="add-button">
+            {showForm ? 'Cancel' : '+ Add Challenge'}
+          </button>
+        </div>
       </div>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".csv"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
 
       {error && <div className="error-message">{error}</div>}
 

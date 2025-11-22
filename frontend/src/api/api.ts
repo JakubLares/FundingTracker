@@ -79,4 +79,18 @@ export const analyticsAPI = {
     api.get<Analytics>('/analytics'),
 };
 
+export const exportAPI = {
+  exportChallenges: () =>
+    api.get('/export/challenges', { responseType: 'blob' }),
+
+  exportPayouts: () =>
+    api.get('/export/payouts', { responseType: 'blob' }),
+
+  importChallenges: (csvData: string) =>
+    api.post('/export/challenges', { csvData }),
+
+  importPayouts: (csvData: string) =>
+    api.post('/export/payouts', { csvData }),
+};
+
 export default api;

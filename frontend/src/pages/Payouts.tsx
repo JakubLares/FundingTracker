@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { payoutAPI, challengeAPI, propFirmAPI } from '../api/api';
+import React, { useEffect, useState, useRef } from 'react';
+import { payoutAPI, challengeAPI, propFirmAPI, exportAPI } from '../api/api';
 import type { Payout, Challenge, PropFirm, CreatePayoutDTO } from '../types';
 import '../styles/Payouts.css';
 
@@ -11,6 +11,7 @@ const Payouts: React.FC = () => {
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<CreatePayoutDTO>({
     challengeId: '',
@@ -113,6 +114,43 @@ const Payouts: React.FC = () => {
     setShowForm(false);
   };
 
+  const handleExport = async () => {
+    try {
+      const response = await exportAPI.exportPayouts();
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'payouts.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err: any) {
+      setError('Failed to export payouts');
+    }
+  };
+
+  const handleImport = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const csvData = await file.text();
+      await exportAPI.importPayouts(csvData);
+      fetchPayouts();
+      setError('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to import payouts');
+    }
+  };
+
   if (isLoading) {
     return <div className="loading">Loading...</div>;
   }
@@ -126,10 +164,26 @@ const Payouts: React.FC = () => {
           <h1>Payouts</h1>
           <p className="total-payouts">Total Payouts: ${totalPayouts.toFixed(2)}</p>
         </div>
-        <button onClick={() => setShowForm(!showForm)} className="add-button">
-          {showForm ? 'Cancel' : '+ Add Payout'}
-        </button>
+        <div className="header-actions">
+          <button onClick={handleExport} className="export-button">
+            Export CSV
+          </button>
+          <button onClick={handleImport} className="import-button">
+            Import CSV
+          </button>
+          <button onClick={() => setShowForm(!showForm)} className="add-button">
+            {showForm ? 'Cancel' : '+ Add Payout'}
+          </button>
+        </div>
       </div>
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        accept=".csv"
+        style={{ display: 'none' }}
+      />
 
       {error && <div className="error-message">{error}</div>}
 
