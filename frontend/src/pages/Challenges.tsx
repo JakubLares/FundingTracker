@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { challengeAPI, propFirmAPI } from '../api/api';
-import { Challenge, PropFirm, CreateChallengeDTO } from '../types';
+import type { Challenge, PropFirm, CreateChallengeDTO } from '../types';
 import '../styles/Challenges.css';
 
 const Challenges: React.FC = () => {
