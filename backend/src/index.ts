@@ -6,6 +6,7 @@ import challengeRoutes from './routes/challengeRoutes';
 import payoutRoutes from './routes/payoutRoutes';
 import propFirmRoutes from './routes/propFirmRoutes';
 import analyticsRoutes from './routes/analyticsRoutes';
+import exportRoutes from './routes/exportRoutes';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api/challenges', challengeRoutes);
 app.use('/api/payouts', payoutRoutes);
 app.use('/api/propfirms', propFirmRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/export', exportRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
