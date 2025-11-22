@@ -16,6 +16,20 @@ export interface PropFirm {
   createdAt: string;
 }
 
+export interface Payout {
+  id: string;
+  userId: string;
+  challengeId?: string;
+  propFirmId?: string;
+  amount: number;
+  date: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+  challenge?: any;
+  propFirm?: PropFirm;
+}
+
 export interface Challenge {
   id: string;
   userId: string;
@@ -31,20 +45,6 @@ export interface Challenge {
   updatedAt: string;
   propFirm?: PropFirm;
   payouts?: Payout[];
-}
-
-export interface Payout {
-  id: string;
-  userId: string;
-  challengeId?: string;
-  propFirmId?: string;
-  amount: number;
-  date: string;
-  notes?: string;
-  createdAt: string;
-  updatedAt: string;
-  challenge?: Challenge;
-  propFirm?: PropFirm;
 }
 
 export interface Analytics {
