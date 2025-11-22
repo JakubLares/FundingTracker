@@ -4,6 +4,27 @@ import { parse } from 'csv-parse/sync';
 import prisma from '../config/database';
 import { AuthRequest } from '../types';
 
+interface ChallengeCSVRecord {
+  'Prop Firm': string;
+  'Challenge ID': string;
+  'Account Size': string;
+  'Purchase Price': string;
+  'Status': string;
+  'Start Date': string;
+  'End Date': string;
+  'Notes': string;
+  'Created At': string;
+}
+
+interface PayoutCSVRecord {
+  'Amount': string;
+  'Date': string;
+  'Challenge ID': string;
+  'Prop Firm': string;
+  'Notes': string;
+  'Created At': string;
+}
+
 export const exportChallenges = async (
   req: AuthRequest,
   res: Response
@@ -102,7 +123,7 @@ export const importChallenges = async (
     const records = parse(csvData, {
       columns: true,
       skip_empty_lines: true,
-    });
+    }) as ChallengeCSVRecord[];
 
     let imported = 0;
     let skipped = 0;
@@ -170,7 +191,7 @@ export const importPayouts = async (
     const records = parse(csvData, {
       columns: true,
       skip_empty_lines: true,
-    });
+    }) as PayoutCSVRecord[];
 
     let imported = 0;
     let skipped = 0;
