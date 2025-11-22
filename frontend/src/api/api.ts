@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {
+import type {
   AuthResponse,
   User,
   Challenge,
@@ -8,7 +8,7 @@ import {
   Analytics,
   CreateChallengeDTO,
   CreatePayoutDTO,
-} from '../types/index';
+} from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
