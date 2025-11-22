@@ -17,6 +17,12 @@
   margin: 0;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .add-button {
   padding: 12px 24px;
   background: #667eea;
@@ -31,6 +37,32 @@
 
 .add-button:hover {
   background: #5568d3;
+}
+
+.export-button,
+.import-button {
+  padding: 10px 20px;
+  background: #51cf66;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.export-button:hover,
+.import-button:hover {
+  background: #40c057;
+}
+
+.import-button {
+  background: #4dabf7;
+}
+
+.import-button:hover {
+  background: #339af0;
 }
 
 .filters {
