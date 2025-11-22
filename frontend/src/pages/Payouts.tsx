@@ -196,7 +196,15 @@ const Payouts: React.FC = () => {
                 <label>Challenge (Optional)</label>
                 <select
                   value={formData.challengeId}
-                  onChange={(e) => setFormData({ ...formData, challengeId: e.target.value })}
+                  onChange={(e) => {
+                    const challengeId = e.target.value;
+                    const selectedChallenge = challenges.find(c => c.id === challengeId);
+                    setFormData({
+                      ...formData,
+                      challengeId,
+                      propFirmId: selectedChallenge?.propFirm?.id || formData.propFirmId
+                    });
+                  }}
                 >
                   <option value="">Select Challenge</option>
                   {challenges.map((challenge) => (
