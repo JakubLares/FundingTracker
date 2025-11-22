@@ -146,7 +146,7 @@ const Payouts: React.FC = () => {
                   <option value="">Select Challenge</option>
                   {challenges.map((challenge) => (
                     <option key={challenge.id} value={challenge.id}>
-                      {challenge.propFirm?.name} - {challenge.phase} - ${Number(challenge.accountSize).toLocaleString()}
+                      {challenge.propFirm?.name} - ${Number(challenge.accountSize).toLocaleString()}{challenge.identifier ? ` - ${challenge.identifier}` : ''}
                     </option>
                   ))}
                 </select>
@@ -227,7 +227,7 @@ const Payouts: React.FC = () => {
                   <div className="detail-item">
                     <span className="label">Challenge:</span>
                     <span className="value">
-                      {payout.challenge.propFirm?.name} - {payout.challenge.phase}
+                      {payout.challenge.propFirm?.name} - ${Number(payout.challenge.accountSize).toLocaleString()}{payout.challenge.identifier ? ` - ${payout.challenge.identifier}` : ''}
                     </span>
                   </div>
                 )}

@@ -20,8 +20,8 @@ export interface LoginDTO {
 
 export interface CreateChallengeDTO {
   propFirmId: string;
+  identifier?: string;
   accountSize: number;
-  phase: string;
   purchasePrice: number;
   status: string;
   startDate?: string;
@@ -31,8 +31,8 @@ export interface CreateChallengeDTO {
 
 export interface UpdateChallengeDTO {
   propFirmId?: string;
+  identifier?: string;
   accountSize?: number;
-  phase?: string;
   purchasePrice?: number;
   status?: string;
   startDate?: string;

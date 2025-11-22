@@ -77,7 +77,7 @@ export const createChallenge = async (
     const userId = req.user?.userId!;
     const data: CreateChallengeDTO = req.body;
 
-    if (!data.propFirmId || !data.accountSize || !data.phase || !data.purchasePrice || !data.status) {
+    if (!data.propFirmId || !data.accountSize || !data.purchasePrice || !data.status) {
       res.status(400).json({ error: 'Missing required fields' });
       return;
     }
@@ -86,8 +86,8 @@ export const createChallenge = async (
       data: {
         userId,
         propFirmId: data.propFirmId,
+        identifier: data.identifier,
         accountSize: data.accountSize,
-        phase: data.phase,
         purchasePrice: data.purchasePrice,
         status: data.status,
         startDate: data.startDate ? new Date(data.startDate) : null,
@@ -130,8 +130,8 @@ export const updateChallenge = async (
     const updateData: any = {};
 
     if (data.propFirmId !== undefined) updateData.propFirmId = data.propFirmId;
+    if (data.identifier !== undefined) updateData.identifier = data.identifier;
     if (data.accountSize !== undefined) updateData.accountSize = data.accountSize;
-    if (data.phase !== undefined) updateData.phase = data.phase;
     if (data.purchasePrice !== undefined) updateData.purchasePrice = data.purchasePrice;
     if (data.status !== undefined) updateData.status = data.status;
     if (data.startDate !== undefined) updateData.startDate = data.startDate ? new Date(data.startDate) : null;

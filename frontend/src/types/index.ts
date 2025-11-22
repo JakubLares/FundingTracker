@@ -34,8 +34,8 @@ export interface Challenge {
   id: string;
   userId: string;
   propFirmId: string;
+  identifier?: string;
   accountSize: number;
-  phase: string;
   purchasePrice: number;
   status: string;
   startDate?: string;
@@ -69,8 +69,8 @@ export interface Analytics {
 
 export interface CreateChallengeDTO {
   propFirmId: string;
+  identifier?: string;
   accountSize: number;
-  phase: string;
   purchasePrice: number;
   status: string;
   startDate?: string;

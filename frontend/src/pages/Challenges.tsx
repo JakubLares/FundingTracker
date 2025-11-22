@@ -15,8 +15,8 @@ const Challenges: React.FC = () => {
 
   const [formData, setFormData] = useState<CreateChallengeDTO>({
     propFirmId: '',
+    identifier: '',
     accountSize: 0,
-    phase: 'Phase 1',
     purchasePrice: 0,
     status: 'in_progress',
     startDate: '',
@@ -73,8 +73,8 @@ const Challenges: React.FC = () => {
   const handleEdit = (challenge: Challenge) => {
     setFormData({
       propFirmId: challenge.propFirmId,
+      identifier: challenge.identifier || '',
       accountSize: Number(challenge.accountSize),
-      phase: challenge.phase,
       purchasePrice: Number(challenge.purchasePrice),
       status: challenge.status,
       startDate: challenge.startDate ? challenge.startDate.split('T')[0] : '',
@@ -99,8 +99,8 @@ const Challenges: React.FC = () => {
   const resetForm = () => {
     setFormData({
       propFirmId: '',
+      identifier: '',
       accountSize: 0,
-      phase: 'Phase 1',
       purchasePrice: 0,
       status: 'in_progress',
       startDate: '',
@@ -176,16 +176,13 @@ const Challenges: React.FC = () => {
 
             <div className="form-row">
               <div className="form-group">
-                <label>Phase *</label>
-                <select
-                  value={formData.phase}
-                  onChange={(e) => setFormData({ ...formData, phase: e.target.value })}
-                  required
-                >
-                  <option value="Phase 1">Phase 1</option>
-                  <option value="Phase 2">Phase 2</option>
-                  <option value="Funded">Funded</option>
-                </select>
+                <label>Challenge ID (Optional)</label>
+                <input
+                  type="text"
+                  value={formData.identifier}
+                  onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
+                  placeholder="e.g., FTPROPLUS638725410957"
+                />
               </div>
               <div className="form-group">
                 <label>Purchase Price *</label>
@@ -267,13 +264,15 @@ const Challenges: React.FC = () => {
                 </span>
               </div>
               <div className="challenge-details">
+                {challenge.identifier && (
+                  <div className="detail-item">
+                    <span className="label">Challenge ID:</span>
+                    <span className="value">{challenge.identifier}</span>
+                  </div>
+                )}
                 <div className="detail-item">
                   <span className="label">Account Size:</span>
                   <span className="value">${Number(challenge.accountSize).toLocaleString()}</span>
-                </div>
-                <div className="detail-item">
-                  <span className="label">Phase:</span>
-                  <span className="value">{challenge.phase}</span>
                 </div>
                 <div className="detail-item">
                   <span className="label">Purchase Price:</span>
