@@ -259,6 +259,36 @@ FundingTracker/
 └── README.md
 ```
 
+## Troubleshooting
+
+### Prisma Version Issue
+
+If you encounter an error like "The datasource property `url` is no longer supported in schema files" when running `npm run prisma:generate`, this means you may have Prisma 7.x installed, which introduced breaking changes.
+
+**Solution:**
+The project now uses Prisma 5.x which is stable. Make sure you have the correct version:
+
+```bash
+cd backend
+npm install @prisma/client@^5.20.0
+npm install --save-dev prisma@^5.20.0
+npm run prisma:generate
+```
+
+### Database Connection Issues
+
+If you get database connection errors:
+1. Ensure PostgreSQL is running
+2. Verify your database credentials in `backend/.env`
+3. Make sure the database `fundingtracker` exists
+4. Check that the PostgreSQL port (default 5432) is correct
+
+### Port Already in Use
+
+If port 3001 or 5173 is already in use:
+- Change `PORT` in `backend/.env` for the backend
+- Change the port in `frontend/vite.config.ts` for the frontend
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
