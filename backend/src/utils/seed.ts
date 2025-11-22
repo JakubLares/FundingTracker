@@ -1,13 +1,12 @@
 import prisma from '../config/database';
 
 const propFirms = [
+  // Top Forex Prop Firms
   'FTMO',
-  'The5ers',
-  'TopStep',
-  'MyForexFunds',
   'FundedNext',
+  'The5ers',
+  'MyForexFunds',
   'E8 Funding',
-  'Apex Trader Funding',
   'Fidelcrest',
   'SurgeTrader',
   'The Funded Trader',
@@ -16,6 +15,27 @@ const propFirms = [
   'BluFx',
   'Lux Trading Firm',
   'Funding Pips',
+  'True Forex Funds',
+  'Prop Firm',
+  'Smart Prop Trader',
+  'AquaFunded',
+  'OANDA',
+  'Alpha Capital Group',
+  'For Traders',
+
+  // Top Futures Prop Firms
+  'TopStep',
+  'Apex Trader Funding',
+  'Funding Ticks',
+  'Earn2Trade',
+  'Bulenox',
+  'TradeDay',
+  'Take Profit Trader',
+  'Elite Trader Funding',
+  'Topstep',
+  'Audacity Capital',
+  'Leeloo Trading',
+  'Uprofit',
 ];
 
 async function seed() {
