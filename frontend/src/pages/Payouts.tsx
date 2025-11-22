@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { payoutAPI, challengeAPI, propFirmAPI } from '../api/api';
-import { Payout, Challenge, PropFirm, CreatePayoutDTO } from '../types';
+import type { Payout, Challenge, PropFirm, CreatePayoutDTO } from '../types';
 import '../styles/Payouts.css';
 
 const Payouts: React.FC = () => {
