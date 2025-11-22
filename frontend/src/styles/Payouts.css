@@ -1,0 +1,93 @@
+.payouts-page {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  color: #333;
+  font-size: 32px;
+  margin: 0 0 10px 0;
+}
+
+.total-payouts {
+  color: #51cf66;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.payouts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.payout-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 4px solid #51cf66;
+}
+
+.payout-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.payout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f1f3f5;
+}
+
+.payout-header h3 {
+  color: #51cf66;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.payout-date {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.payout-details {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.payout-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f1f3f5;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .payouts-list {
+    grid-template-columns: 1fr;
+  }
+}

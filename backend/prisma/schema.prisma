@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  password  String
+  name      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  challenges Challenge[]
+  payouts   Payout[]
+}
+
+model PropFirm {
+  id         String      @id @default(uuid())
+  name       String      @unique
+  createdAt  DateTime    @default(now())
+  challenges Challenge[]
+  payouts    Payout[]
+}
+
+model Challenge {
+  id             String    @id @default(uuid())
+  userId         String
+  propFirmId     String
+  accountSize    Decimal
+  phase          String    // e.g., "Phase 1", "Phase 2", "Funded"
+  purchasePrice  Decimal
+  status         String    // "in_progress", "passed", "failed"
+  startDate      DateTime?
+  endDate        DateTime?
+  notes          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  propFirm       PropFirm  @relation(fields: [propFirmId], references: [id])
+  payouts        Payout[]
+
+  @@index([userId])
+  @@index([propFirmId])
+}
+
+model Payout {
+  id          String    @id @default(uuid())
+  userId      String
+  challengeId String?
+  propFirmId  String?
+  amount      Decimal
+  date        DateTime
+  notes       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge   Challenge? @relation(fields: [challengeId], references: [id], onDelete: SetNull)
+  propFirm    PropFirm?  @relation(fields: [propFirmId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([challengeId])
+  @@index([propFirmId])
+}
