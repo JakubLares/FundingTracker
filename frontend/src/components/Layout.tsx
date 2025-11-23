@@ -23,9 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="layout">
       <nav className="navbar">
         <div className="nav-brand">
-          <h2>
-            <span className="brand-gradient">Funded</span>Tracker
-          </h2>
+          <h2>FundedTracker</h2>
         </div>
         {user && (
           <div className="nav-links">

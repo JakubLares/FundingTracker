@@ -123,47 +123,6 @@
   margin-bottom: 24px;
 }
 
-.quick-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 100%;
-}
-
-.action-button {
-  padding: 20px 40px;
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.action-button-challenges {
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
-}
-
-.action-button-challenges:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
-}
-
-.action-button-payouts {
-  background: #3b82f6;
-}
-
-.action-button-payouts:hover {
-  background: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-}
-
 .loading,
 .error {
   text-align: center;
@@ -196,10 +155,6 @@
   }
 
   .stats-grid-main {
-    grid-template-columns: 1fr;
-  }
-
-  .quick-actions {
     grid-template-columns: 1fr;
   }
 

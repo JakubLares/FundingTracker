@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { analyticsAPI } from '../api/api';
 import type { Analytics } from '../types';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -115,15 +114,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       )}
-
-      <div className="quick-actions">
-        <Link to="/challenges" className="action-button action-button-challenges">
-          Manage Challenges →
-        </Link>
-        <Link to="/payouts" className="action-button action-button-payouts">
-          Manage Payouts →
-        </Link>
-      </div>
     </div>
   );
 };
