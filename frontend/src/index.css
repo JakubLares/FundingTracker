@@ -10,12 +10,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f8f9fa;
-  color: #333;
+  background: #0f1729;
+  color: #e4e7eb;
 }
 
 #root {
   min-height: 100vh;
+  background: #0f1729;
 }
 
 .loading {
@@ -24,7 +25,7 @@ body {
   align-items: center;
   min-height: 100vh;
   font-size: 20px;
-  color: #666;
+  color: #9ca3af;
 }
 
 .error {
@@ -33,15 +34,15 @@ body {
   align-items: center;
   min-height: 100vh;
   font-size: 20px;
-  color: #c33;
+  color: #ef4444;
 }
 
 .error-message {
-  background: #fee;
-  color: #c33;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 20px;
   text-align: center;
-  border: 1px solid #fcc;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }

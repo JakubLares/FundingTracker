@@ -39,62 +39,56 @@ const Dashboard: React.FC = () => {
 
   const { summary, monthlyData } = analytics;
 
+  const inProgressPercentage = summary.totalChallenges > 0
+    ? ((summary.inProgressChallenges / summary.totalChallenges) * 100).toFixed(0)
+    : 0;
+
   return (
     <div className="dashboard">
-      <h1>Dashboard</h1>
+      <div className="dashboard-header">
+        <h1>Dashboard</h1>
+        <p className="dashboard-subtitle">Track your trading challenges and performance</p>
+      </div>
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Total Challenges</h3>
+      <div className="stats-grid-main">
+        <div className="stat-card stat-card-total">
+          <h3>TOTAL CHALLENGES</h3>
           <p className="stat-value">{summary.totalChallenges}</p>
         </div>
-        <div className="stat-card success">
-          <h3>Passed Challenges</h3>
+        <div className="stat-card stat-card-passed">
+          <h3>PASSED</h3>
           <p className="stat-value">{summary.passedChallenges}</p>
         </div>
-        <div className="stat-card danger">
-          <h3>Failed Challenges</h3>
+        <div className="stat-card stat-card-failed">
+          <h3>FAILED</h3>
           <p className="stat-value">{summary.failedChallenges}</p>
         </div>
-        <div className="stat-card info">
-          <h3>In Progress</h3>
-          <p className="stat-value">{summary.inProgressChallenges}</p>
-        </div>
-        <div className="stat-card warning">
-          <h3>Total Costs</h3>
-          <p className="stat-value">${summary.totalCosts.toFixed(2)}</p>
-        </div>
-        <div className="stat-card success">
-          <h3>Total Earnings</h3>
-          <p className="stat-value">${summary.totalEarnings.toFixed(2)}</p>
-        </div>
-        <div className={`stat-card ${summary.profitLoss >= 0 ? 'success' : 'danger'}`}>
-          <h3>Profit/Loss</h3>
-          <p className="stat-value">${summary.profitLoss.toFixed(2)}</p>
-        </div>
-        <div className="stat-card info">
-          <h3>ROI</h3>
-          <p className="stat-value">{summary.roi.toFixed(2)}%</p>
-        </div>
-        <div className="stat-card">
-          <h3>Success Rate</h3>
-          <p className="stat-value">{summary.successRate.toFixed(2)}%</p>
+        <div className="stat-card stat-card-progress">
+          <h3>IN PROGRESS</h3>
+          <p className="stat-value">{inProgressPercentage}%</p>
         </div>
       </div>
 
       {monthlyData.length > 0 && (
         <div className="charts-container">
           <div className="chart-card">
-            <h2>Monthly Costs vs Earnings</h2>
+            <h2>Track your trading and performance</h2>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                <XAxis dataKey="month" stroke="#9ca3af" />
+                <YAxis stroke="#9ca3af" />
+                <Tooltip
+                  contentStyle={{
+                    background: '#1a1f35',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    color: '#e4e7eb'
+                  }}
+                />
                 <Legend />
-                <Line type="monotone" dataKey="costs" stroke="#ff6b6b" name="Costs" />
-                <Line type="monotone" dataKey="earnings" stroke="#51cf66" name="Earnings" />
+                <Line type="monotone" dataKey="costs" stroke="#ec4899" name="Costs" strokeWidth={2} />
+                <Line type="monotone" dataKey="earnings" stroke="#06b6d4" name="Earnings" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -103,12 +97,19 @@ const Dashboard: React.FC = () => {
             <h2>Monthly Profit/Loss</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                <XAxis dataKey="month" stroke="#9ca3af" />
+                <YAxis stroke="#9ca3af" />
+                <Tooltip
+                  contentStyle={{
+                    background: '#1a1f35',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    color: '#e4e7eb'
+                  }}
+                />
                 <Legend />
-                <Bar dataKey="profitLoss" fill="#667eea" name="Profit/Loss" />
+                <Bar dataKey="profitLoss" fill="#8b5cf6" name="Monthly Profit" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -116,11 +117,11 @@ const Dashboard: React.FC = () => {
       )}
 
       <div className="quick-actions">
-        <Link to="/challenges" className="action-button">
-          Manage Challenges
+        <Link to="/challenges" className="action-button action-button-challenges">
+          Manage Challenges →
         </Link>
-        <Link to="/payouts" className="action-button">
-          Manage Payouts
+        <Link to="/payouts" className="action-button action-button-payouts">
+          Manage Payouts →
         </Link>
       </div>
     </div>

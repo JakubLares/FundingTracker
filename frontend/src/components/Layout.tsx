@@ -23,7 +23,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="layout">
       <nav className="navbar">
         <div className="nav-brand">
-          <h2>FundedTracker</h2>
+          <h2>
+            <span className="brand-gradient">Funded</span>Tracker
+          </h2>
         </div>
         {user && (
           <div className="nav-links">
@@ -40,7 +42,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         )}
         {user && (
           <div className="nav-user">
-            <span className="user-name">{user.name}</span>
             <button onClick={handleLogout} className="logout-button">
               Logout
             </button>

@@ -1,5 +1,5 @@
 .challenges-page {
-  padding: 30px;
+  padding: 40px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -12,7 +12,7 @@
 }
 
 .page-header h1 {
-  color: #333;
+  color: #e4e7eb;
   font-size: 32px;
   margin: 0;
 }
@@ -25,44 +25,49 @@
 
 .add-button {
   padding: 12px 24px;
-  background: #667eea;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .add-button:hover {
-  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
 .export-button,
 .import-button {
   padding: 10px 20px;
-  background: #51cf66;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .export-button:hover,
 .import-button:hover {
-  background: #40c057;
+  background: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
 .import-button {
-  background: #4dabf7;
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
 .import-button:hover {
-  background: #339af0;
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 .filters {
@@ -73,23 +78,34 @@
 
 .filters select {
   padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   font-size: 14px;
-  background: white;
+  background: #1a1f35;
+  color: #e4e7eb;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filters select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filters select:focus {
+  outline: none;
+  border-color: #8b5cf6;
 }
 
 .form-container {
-  background: white;
+  background: #1a1f35;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 30px;
 }
 
 .form-container h2 {
-  color: #333;
+  color: #e4e7eb;
   margin-bottom: 20px;
 }
 
@@ -107,7 +123,7 @@
 
 .form-group label {
   margin-bottom: 5px;
-  color: #555;
+  color: #9ca3af;
   font-weight: 500;
   font-size: 14px;
 }
@@ -116,16 +132,25 @@
 .form-group select,
 .form-group textarea {
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   font-size: 14px;
+  background: #0f1729;
+  color: #e4e7eb;
+  transition: all 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #6b7280;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.05);
 }
 
 .form-actions {
@@ -136,32 +161,34 @@
 
 .submit-button {
   padding: 12px 24px;
-  background: #667eea;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .submit-button:hover {
-  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
 .cancel-button {
   padding: 12px 24px;
-  background: #e9ecef;
-  color: #495057;
-  border: none;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #9ca3af;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .cancel-button:hover {
-  background: #dee2e6;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e4e7eb;
 }
 
 .challenges-list {
@@ -171,16 +198,16 @@
 }
 
 .challenge-card {
-  background: white;
+  background: #1a1f35;
   padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .challenge-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .challenge-header {
@@ -189,13 +216,14 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f1f3f5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .challenge-header h3 {
-  color: #333;
+  color: #e4e7eb;
   margin: 0;
   font-size: 20px;
+  font-weight: 600;
 }
 
 .status-badge {
@@ -207,18 +235,21 @@
 }
 
 .status-badge.in_progress {
-  background: #fff3bf;
-  color: #856404;
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 .status-badge.passed {
-  background: #d4edda;
-  color: #155724;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .status-badge.failed {
-  background: #f8d7da;
-  color: #721c24;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .challenge-details {
@@ -239,13 +270,13 @@
 }
 
 .detail-item .label {
-  color: #666;
+  color: #9ca3af;
   font-size: 14px;
   font-weight: 500;
 }
 
 .detail-item .value {
-  color: #333;
+  color: #e4e7eb;
   font-size: 14px;
   font-weight: 600;
 }
@@ -255,7 +286,7 @@
   gap: 10px;
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .edit-button,
@@ -263,38 +294,46 @@
   flex: 1;
   padding: 8px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .edit-button {
-  background: #4dabf7;
-  color: white;
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .edit-button:hover {
-  background: #339af0;
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 .delete-button {
-  background: #ff6b6b;
-  color: white;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .delete-button:hover {
-  background: #fa5252;
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 .no-data {
   text-align: center;
   padding: 50px;
-  color: #999;
+  color: #6b7280;
   font-size: 18px;
 }
 
 @media (max-width: 768px) {
+  .challenges-page {
+    padding: 20px;
+  }
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
